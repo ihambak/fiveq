@@ -1,0 +1,89 @@
+1. Excel Importer 모듈 추가
+   엑셀을 가져오려면 Excel Importer 모듈을 설치해야 해.
+
+1-1. Excel Importer 모듈 다운로드
+Mendix Studio Pro에서 프로젝트를 열기
+App Store 버튼 클릭
+검색창에 Excel Importer 입력
+Excel Importer 모듈 선택 후 다운로드 및 프로젝트에 추가
+Excel Importer가 의존하는 모듈도 같이 설치됨
+Mx Model Reflection (Mendix 모델을 반영하기 위해 필요)
+MendixSSO (Single Sign-On 관련, 필요 없으면 무시 가능)
+1-2. 모듈 확인
+App Explorer에서 Excel Importer와 Mx Model Reflection 모듈이 추가되었는지 확인
+
+2. 엔티티(Entity) 준비
+   엑셀 데이터를 저장할 엔티티를 만들어야 해.
+
+2-1. ExcelDB 엔티티 생성
+Domain Model 열기
+ExcelDB 엔티티 생성
+다음 속성 추가
+Name (String)
+Age (Integer)
+Email (String)
+JoinDate (DateTime)
+이제 ExcelDB 엔티티가 준비됨.
+
+3. Mx Model Reflection 설정
+   Excel Importer가 ExcelDB 엔티티를 인식하도록 해야 함.
+
+App Explorer에서 Mx Model Reflection 모듈로 이동
+Sync objects 마이크로플로우 실행
+팝업 창에서 ExcelDB 엔티티 체크 후 Sync 버튼 클릭
+ExcelDB 엔티티가 Excel Importer에서 사용할 수 있도록 반영됨
+4. Excel Importer 설정
+   이제 Excel Importer에서 ExcelDB와 연결할 Import Template을 만들어야 해.
+
+4-1. Import Template 생성
+App Explorer에서 Excel Importer > Import Templates 열기
+New 버튼 클릭하여 새 Import Template 생성
+설정값 입력
+Template Name: ExcelDB Import
+Main Object: ExcelDB (Mx Model Reflection에서 동기화한 엔티티)
+Has Header Row: 체크 (엑셀 첫 번째 행을 컬럼명으로 인식)
+4-2. 컬럼 매핑
+Column Mapping 탭 열기
+엑셀의 컬럼을 ExcelDB 속성과 연결
+Column 1 → Name (String)
+Column 2 → Age (Integer)
+Column 3 → Email (String)
+Column 4 → JoinDate (DateTime)
+올바르게 매핑되었는지 확인하고 저장
+5. 엑셀 파일 업로드 UI 만들기
+   이제 사용자가 엑셀 파일을 업로드하고 Import 실행 버튼을 누를 수 있도록 UI를 만들어 보자.
+
+5-1. 새 페이지 생성
+Pages 폴더에서 새 페이지 생성 (Excel Import Page)
+
+File Manager 위젯 추가
+
+Purpose: File Upload
+Entity: System.FileDocument
+버튼 추가 (Import 실행)
+
+버튼 클릭 시 Import가 실행되도록 설정
+5-2. Import 실행 마이크로플로우 만들기
+엑셀 파일을 Import하는 마이크로플로우를 작성해야 해.
+
+App Explorer에서 New Microflow 생성 (MF_ImportExcel)
+
+다음 액션 추가
+
+Parameter 추가 → FileDocument (업로드된 파일)
+Call Java Action 사용
+Java Action: StartImportByTemplate 선택
+Parameter 설정
+TemplateName: ExcelDB Import
+FileDocument: 업로드된 파일 연결
+마이크로플로우를 저장하고, 업로드 버튼 클릭 시 실행되도록 설정
+
+6. 테스트 및 확인
+   앱 실행 (Run Locally)
+   Excel Import Page로 이동
+   엑셀 파일 업로드
+   Import 버튼 클릭
+   ExcelDB 엔티티에 데이터가 잘 저장되었는지 확인 (Database Viewer 사용)
+   추가 팁
+   자동 Import: 특정 이벤트 발생 시 자동 Import 하려면 After Commit 이벤트에서 마이크로플로우 실행
+   로그 확인: Import 과정에서 문제가 발생하면 Console Logs에서 Excel Importer 관련 로그를 확인
