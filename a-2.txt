@@ -1,0 +1,107 @@
+1. 도메인 모델(Entity) 생성
+   먼저 ExcelDB 엔티티를 만들어야 합니다.
+
+도메인 모델 설정 방법
+Studio Pro에서 프로젝트를 엽니다.
+MyModule (또는 원하는 모듈) 안에서 Domain Model을 엽니다.
+New Entity 버튼을 클릭하여 ExcelDB 엔티티를 생성합니다.
+다음과 같은 속성을 추가합니다.
+Name (String)
+Age (Integer)
+Save 버튼을 눌러 저장합니다.
+2. Excel 파일을 업로드할 페이지 만들기
+   파일을 업로드하고 가져오기 버튼을 추가하는 페이지를 생성합니다.
+
+페이지 생성 방법
+Project Explorer에서 MyModule 안의 Pages 폴더를 우클릭 → Add Page 선택
+빈 페이지를 선택하고 Create 클릭
+File Manager 위젯 추가
+Toolbox에서 File Manager를 드래그하여 페이지에 추가
+FileDocument 엔티티를 생성하여 연결 (File 저장을 위한 시스템 엔티티)
+"Upload Only" 옵션 활성화
+버튼 추가
+Button을 추가하고 On Click에서 Call a Microflow를 선택
+New Microflow를 만들어 ImportExcelData라고 이름 설정
+3. 마이크로플로우(Microflow) 생성
+   Excel 파일을 업로드하면 Java Action을 호출하도록 마이크로플로우를 만듭니다.
+
+마이크로플로우 생성 방법
+Project Explorer에서 MyModule 안의 Microflows 폴더를 우클릭 → Add Microflow 클릭
+ImportExcelData 이름으로 생성 후 마이크로플로우 편집 창 열기
+Input Parameter 추가
+마이크로플로우의 Input Parameter로 FileDocument 엔티티 추가 (System.FileDocument)
+Java Action 호출
+Toolbox에서 Java Action을 드래그하여 마이크로플로우 안에 추가
+ExcelImporter.importExcelFile을 선택하고 생성
+Java Action의 입력값 설정
+FileDocument의 Content 값을 Java Action의 excelFile에 전달
+Commit Changes
+ExcelDB 엔티티에 데이터를 저장해야 하므로 Commit 액션 추가
+ExcelDB 객체를 선택하고, Commit without events 활성화
+4. Java Action 생성 및 연결
+   마이크로플로우에서 사용할 Java Action을 생성합니다.
+
+Java Action 생성 방법
+Project Explorer에서 Java Actions 폴더를 우클릭 → Add Java Action 선택
+Java Action 이름을 ImportExcelFile로 지정하고 생성
+Parameters 설정
+excelFile (Type: FileDocument)
+Return Type 설정
+Boolean (성공 여부 반환)
+Java Action 구현
+앞에서 작성한 Java 코드를 Java Action의 구현부에 추가합니다.
+
+Java 코드 (ImportExcelFile.java)
+```
+import com.mendix.core.Core;
+import com.mendix.systemwideinterfaces.core.IContext;
+import com.mendix.systemwideinterfaces.core.IMendixObject;
+import com.mendix.systemwideinterfaces.core.IDataType;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import java.io.InputStream;
+import java.util.Iterator;
+
+public class ImportExcelFile {
+public static boolean executeAction(IContext context, IMendixObject fileDocument) throws Exception {
+InputStream excelFile = Core.getFileDocumentContent(context, fileDocument);
+Workbook workbook = new XSSFWorkbook(excelFile);
+Sheet sheet = workbook.getSheetAt(0);
+Iterator<Row> rowIterator = sheet.iterator();
+
+        // 첫 번째 행(헤더) 스킵
+        if (rowIterator.hasNext()) {
+            rowIterator.next();
+        }
+
+        while (rowIterator.hasNext()) {
+            Row row = rowIterator.next();
+            IMendixObject excelDBRecord = Core.instantiate(context, "MyModule.ExcelDB");
+
+            // 첫 번째 열: Name, 두 번째 열: Age
+            Cell cell1 = row.getCell(0);
+            Cell cell2 = row.getCell(1);
+
+            if (cell1 != null) {
+                excelDBRecord.setValue(context, "Name", cell1.getStringCellValue());
+            }
+            if (cell2 != null) {
+                excelDBRecord.setValue(context, "Age", (int) cell2.getNumericCellValue());
+            }
+
+            Core.commit(context, excelDBRecord);
+        }
+
+        workbook.close();
+        return true;
+    }
+}
+```
+5. Java Action을 마이크로플로우에 추가
+   Microflow로 돌아와서 Java Action을 추가합니다.
+   ImportExcelFile을 선택하고, FileDocument 인자를 연결합니다.
+   Java Action의 출력(Boolean)을 확인하고, 필요하면 로그를 남깁니다.
+6. 테스트 및 실행
+   Mendix를 실행하고 Excel 파일을 업로드합니다.
+   "Import Excel" 버튼을 클릭하면 마이크로플로우가 실행됩니다.
+   ExcelDB 엔티티에서 데이터가 정상적으로 저장되었는지 확인합니다.
