@@ -1,0 +1,25 @@
+export async function triggerTabClick(tabName) {
+    try {
+        // Mendix의 현재 페이지에서 탭 컨테이너 찾기
+        const tabContainer = document.querySelector(".mx-tabcontainer-tabs");
+        
+        if (!tabContainer) {
+            console.error("탭 컨테이너를 찾을 수 없습니다.");
+            return;
+        }
+        
+        // 모든 탭을 찾아서 이름이 일치하는 탭을 클릭
+        const tabs = tabContainer.querySelectorAll(".mx-tabcontainer-tab");
+        for (let tab of tabs) {
+            if (tab.innerText.trim() === tabName) {
+                tab.click(); // 해당 탭 클릭 (트리거)
+                console.log(`탭 '${tabName}' 클릭됨 (트리거 실행)`);
+                return;
+            }
+        }
+        
+        console.warn(`탭 '${tabName}'을 찾을 수 없습니다.`);
+    } catch (error) {
+        console.error("탭 클릭 트리거 실행 중 오류 발생:", error);
+    }
+}
