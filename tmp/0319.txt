@@ -1,0 +1,40 @@
+/* Oracle JDBC URL */
+String oracleUrl = "jdbc:oracle:thin:@//hostname:1521/dbname";
+String oracleUser = "username";
+String oraclePassword = "password";
+
+/* MySQL JDBC URL */
+String mysqlUrl = "jdbc:mysql://hostname:3306/dbname?useSSL=false&serverTimezone=UTC";
+String mysqlUser = "username";
+String mysqlPassword = "password";
+
+/* PostgreSQL JDBC URL */
+String postgresUrl = "jdbc:postgresql://hostname:5432/dbname";
+String postgresUser = "username";
+String postgresPassword = "password";
+
+/* Microsoft SQL Server JDBC URL */
+String mssqlUrl = "jdbc:sqlserver://hostname:1433;databaseName=dbname;encrypt=true;trustServerCertificate=true";
+String mssqlUser = "username";
+String mssqlPassword = "password";
+
+/* SAP HANA JDBC URL */
+String saphanaUrl = "jdbc:sap://hostname:39015/?databaseName=dbname";
+String saphanaUser = "username";
+String saphanaPassword = "password";
+
+/* 연결 예제 */
+// Oracle 연결
+Connection oracleConn = DriverManager.getConnection(oracleUrl, oracleUser, oraclePassword);
+
+// MySQL 연결
+Connection mysqlConn = DriverManager.getConnection(mysqlUrl, mysqlUser, mysqlPassword);
+
+// PostgreSQL 연결
+Connection postgresConn = DriverManager.getConnection(postgresUrl, postgresUser, postgresPassword);
+
+// Microsoft SQL Server 연결
+Connection mssqlConn = DriverManager.getConnection(mssqlUrl, mssqlUser, mssqlPassword);
+
+// SAP HANA 연결
+Connection saphanaConn = DriverManager.getConnection(saphanaUrl, saphanaUser, saphanaPassword);
