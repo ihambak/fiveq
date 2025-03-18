@@ -1,0 +1,3 @@
+const element = document.querySelector('.a'); // 클래스가 'a'인 요소 선택
+const displayValue = window.getComputedStyle(element).display;
+console.log("display 값:", displayValue);
