@@ -1,0 +1,31 @@
+import java.util.List;
+import com.mendix.core.Core;
+import com.mendix.systemwideinterfaces.core.IContext;
+import com.mendix.systemwideinterfaces.core.IMendixObject;
+import com.mendix.systemwideinterfaces.core.IMendixObjectMember;
+import com.mendix.systemwideinterfaces.core.IDataType.DataTypeEnum;
+import java.util.Date;
+
+public class ImportExcelData {
+    public static void executeAction(IContext context, List<IMendixObject> excelDataList) throws Exception {
+        for (IMendixObject obj : excelDataList) {
+            // 새 Mendix Object 생성 (ExcelData 엔티티)
+            IMendixObject newData = Core.instantiate(context, "MyModule.ExcelData");
+
+            // Name (String)
+            String name = obj.getValue(context, "Name");
+            newData.setValue(context, "Name", name);
+
+            // Date (Datetime)
+            Date date = obj.getValue(context, "Date");
+            newData.setValue(context, "Date", date);
+
+            // isConnect (Boolean)
+            Boolean isConnect = obj.getValue(context, "isConnect");
+            newData.setValue(context, "isConnect", isConnect);
+
+            // 객체 저장
+            Core.commit(context, newData);
+        }
+    }
+}
