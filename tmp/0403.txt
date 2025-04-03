@@ -1,30 +1,44 @@
 import java.util.List;
+import java.util.Date;
+import java.util.Optional;
 import com.mendix.core.Core;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.systemwideinterfaces.core.IMendixObjectMember;
 import com.mendix.systemwideinterfaces.core.IDataType.DataTypeEnum;
-import java.util.Date;
+import com.mendix.systemwideinterfaces.core.IMendixIdentifier;
 
 public class ImportExcelData {
     public static void executeAction(IContext context, List<IMendixObject> excelDataList) throws Exception {
         for (IMendixObject obj : excelDataList) {
-            // 새 Mendix Object 생성 (ExcelData 엔티티)
+            // Name 가져오기
+            String name = obj.getValue(context, "Name");
+
+            // Account 엔티티에서 Name이 일치하는 객체 찾기
+            List<IMendixObject> accounts = Core.retrieveXPathQuery(context, 
+                "//MyModule.Account[FullName='" + name + "']");
+
+            IMendixObject accountObj = accounts.isEmpty() ? null : accounts.get(0);
+
+            if (accountObj == null) {
+                // 계정이 없으면 로그 출력 (또는 새 Account를 생성할 수도 있음)
+                Core.getLogger("ImportExcelData").info("Account not found for Name: " + name);
+                continue;
+            }
+
+            // 새 ExcelData 객체 생성
             IMendixObject newData = Core.instantiate(context, "MyModule.ExcelData");
 
-            // Name (String)
-            String name = obj.getValue(context, "Name");
+            // 값 설정
             newData.setValue(context, "Name", name);
+            newData.setValue(context, "Date", obj.getValue(context, "Date"));
+            newData.setValue(context, "isConnect", obj.getValue(context, "isConnect"));
 
-            // Date (Datetime)
-            Date date = obj.getValue(context, "Date");
-            newData.setValue(context, "Date", date);
+            // Association 설정
+            IMendixIdentifier accountId = accountObj.getId();
+            newData.setValue(context, "MyModule.ExcelData_Account", accountId);
 
-            // isConnect (Boolean)
-            Boolean isConnect = obj.getValue(context, "isConnect");
-            newData.setValue(context, "isConnect", isConnect);
-
-            // 객체 저장
+            // 데이터 저장
             Core.commit(context, newData);
         }
     }
