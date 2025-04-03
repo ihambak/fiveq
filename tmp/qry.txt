@@ -1,0 +1,9 @@
+SELECT 
+    o.orderno,
+    o.memberid,
+    o.membername,
+    oi.itemno,
+    oi.itemtitle
+FROM order o
+JOIN mymodel$order_orderitem a ON o.id = a.orderid
+JOIN orderitem oi ON a.orderitemid = oi.id;
