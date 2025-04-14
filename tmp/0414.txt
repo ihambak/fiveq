@@ -1,0 +1,41 @@
+import java.util.*;
+import com.mendix.core.Core;
+import com.mendix.systemwideinterfaces.core.IContext;
+import com.mendix.systemwideinterfaces.core.IMendixObject;
+import com.mendix.systemwideinterfaces.core.meta.IMetaObject;
+import com.mendix.systemwideinterfaces.core.meta.IMetaPrimitive;
+import com.mendix.systemwideinterfaces.core.meta.IMetaPrimitive.PrimitiveType;
+
+public class RunOQLQuery {
+
+    public static List<Map<String, String>> executeOQL(IContext context, String memberId) throws Exception {
+        String query =
+            "SELECT " +
+            "o.OrderNo, " +
+            "o.MemberId, " +
+            "o.MemberName, " +
+            "i.ItemNo, " +
+            "i.ItemTitle " +
+            "FROM MyModel.Order AS o " +
+            "INNER JOIN o/MyModel.Order_OrderItem/MyModel.OrderItem AS i " +
+            "WHERE o.MemberId = $memberId";
+
+        Map<String, Object> parameters = new HashMap<>();
+        parameters.put("memberId", memberId);
+
+        List<Map<String, String>> results = new ArrayList<>();
+
+        Iterable<IMendixObject> resultSet = Core.retrieveOQLData(context, query, parameters);
+
+        for (IMendixObject row : resultSet) {
+            Map<String, String> rowMap = new HashMap<>();
+            for (IMetaPrimitive attr : row.getMetaObject().getMetaPrimitives()) {
+                Object value = row.getValue(context, attr.getName());
+                rowMap.put(attr.getName(), value != null ? value.toString() : "");
+            }
+            results.add(rowMap);
+        }
+
+        return results;
+    }
+}
