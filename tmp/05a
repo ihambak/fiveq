@@ -1,0 +1,161 @@
+Mendix 교육 목표 및 교육 내용
+
+교육 목표
+
+Mendix 교육을 통해 학습자는 다음 목표를 달성할 수 있습니다.
+
+1. Mendix 기본 개요
+
+Mendix의 Low Code 개념과 활용 사례를 이해하고 설명할 수 있다.
+
+Mendix Studio Pro를 설치하고 기본 환경을 설정할 수 있다.
+
+2. 형상 관리
+
+Github와 Git Bash를 사용하여 Mendix 프로젝트를 형상 관리할 수 있다.
+
+Clone, Commit, Push, Pull 등의 기본 Git 명령을 수행할 수 있다.
+
+팀 협업을 위한 Branch 관리 방식을 이해하고 적용할 수 있다.
+
+3. App Story
+
+요구사항을 수집하고 App Story로 정의할 수 있다.
+
+Story 기반으로 UI/UX 설계를 수행할 수 있다.
+
+4. App 생성
+
+Mendix Studio Pro에서 앱을 생성, 열기, 가져오기 작업을 수행할 수 있다.
+
+앱의 기본 설정을 이해하고 초기 구조를 구성할 수 있다.
+
+5. Module 설정
+
+앱의 설정(Configuration/Runtime)을 이해하고 설정할 수 있다.
+
+시스템 모듈과 사용자 모듈을 생성하고 관리할 수 있다.
+
+모듈 간 의존성을 설정하고 유지할 수 있다.
+
+6. Domain Model
+
+PE/NPE Entity를 생성하고 Association을 설정할 수 있다.
+
+Client tool을 사용하여 Domain Model 구조를 확인할 수 있다.
+
+Entity 속성 및 권한을 설정할 수 있다.
+
+7. Page 생성 및 관리
+
+페이지를 생성하고 Properties/Styling을 설정할 수 있다.
+
+Toolbox를 사용하여 위젯을 추가하고 구성할 수 있다.
+
+반응형 페이지를 설계할 수 있다.
+
+8. Microflow 및 Nanoflow
+
+CRUD 기능을 구현할 수 있다.
+
+Validation을 설정하고 Form, Flow의 유효성을 검증할 수 있다.
+
+Debugging을 통해 오류를 진단하고 해결할 수 있다.
+
+9. Navigation 및 Role 설정
+
+앱 내 Navigation을 구성하고 설정할 수 있다.
+
+Security 설정을 통해 사용자 권한을 관리할 수 있다.
+
+사용자 권한 그룹을 생성하고 역할 기반 접근 제어를 설정할 수 있다.
+
+10. 코드 사용
+
+Javascript Action을 사용하여 사용자 정의 기능을 구현할 수 있다.
+
+Java Action을 통해 Java 코드를 작성하고 Mendix와 연동할 수 있다.
+
+코드 최적화 및 성능 개선 방법을 이해하고 적용할 수 있다.
+
+교육 내용
+
+1. Mendix 기본 개요
+
+Mendix 소개 및 활용 사례
+
+Low Code 개념 이해
+
+Mendix Studio Pro 설치 및 환경 설정
+
+2. 형상 관리
+
+Github 연동 설정 (Git Bash 사용)
+
+Clone, Commit, Push, Pull 사용 방법
+
+팀 협업을 위한 Branch 관리
+
+3. App Story
+
+Story 정의 (화면/기능)
+
+요구사항 수집 및 Story 작성
+
+Story 기반으로 UI/UX 설계
+
+4. App 생성
+
+앱 생성(Create), 열기(Open), 가져오기(Import)
+
+앱 기본 설정 및 초기 구조 구성
+
+5. Module 설정
+
+앱 설정 (Configuration / Runtime)
+
+시스템 모듈(System)과 사용자 모듈(User Module) 생성
+
+모듈 간 의존성 설정 및 관리
+
+6. Domain Model
+
+Entity 생성 (PE/NPE) 및 Association 설정
+
+Client tool을 통한 생성 및 구조 확인
+
+Entity 속성 및 권한 설정
+
+7. Page 생성 및 관리
+
+페이지 생성
+
+Properties / Styling 설정
+
+Toolbox 사용 (Widget, Building Block)
+
+반응형 디자인 설정
+
+8. Microflow 및 Nanoflow
+
+CRUD 구현
+
+Validation 설정 (Entity, Form, Flow)
+
+Debugging 수행 (Breakpoint, Variable Check)
+
+9. Navigation 및 Role 설정
+
+앱 내 네비게이션 설정
+
+Security 설정 (App, Module)
+
+사용자 권한 그룹 생성 및 관리
+
+10. 코드 사용
+
+Javascript Action 사용 (기본/고급)
+
+Java Action 사용 (Java 코드 작성 및 연동)
+
+코드 최적화 및 성능 개선
