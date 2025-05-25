@@ -1,0 +1,95 @@
+20 Navigation 설정  (일반버전)
+
+Mendix에서 Navigation은 사용자가 앱 내에서 화면(페이지) 간 이동할 수 있도록 경로를 설정하는 기능입니다. 즉, 앱의 메뉴 구조를 정의하고, 사용자가 어떤 페이지를 어떻게 접근할 수 있을지를 결정하는 중요한 부분이에요.
+Mendix Navigation 개념
+Navigation은 앱 실행 시 사용자에게 보여지는 메뉴와 링크를 구성합니다.
+보통 상단 메뉴(Top navigation) 또는 사이드 메뉴(Side navigation) 형태로 구성됩니다.
+사용자 역할(Role)별로 다른 Navigation을 설정할 수 있어서, 각 사용자에게 맞는 메뉴를 보여줄 수 있습니다.
+특정 페이지나 URL을 메뉴 항목으로 등록해서 사용자가 쉽게 접근할 수 있도록 합니다.
+Navigation 설정하는 방법
+1. Mendix Studio Pro에서 프로젝트 열기
+먼저 Mendix Studio Pro에서 작업할 프로젝트를 엽니다.
+2. Navigation 편집하기
+Project Explorer에서 Navigation 폴더를 찾습니다.
+그 안에 기본적으로 Navigation 문서가 있습니다. 더블클릭해서 엽니다.
+3. 메뉴 구조 추가/편집
+화면에 메뉴 항목을 추가할 수 있는 인터페이스가 나옵니다.
+메뉴에 포함할 **페이지(Page)**를 드래그하거나, 기존 메뉴 항목을 선택해서 편집합니다.
+메뉴 항목에는 이름, 페이지 연결, 아이콘 등을 지정할 수 있습니다.
+메뉴는 계층 구조(하위 메뉴)로 만들 수도 있습니다.
+4. 사용자 역할별 메뉴 설정
+상단에 사용자 역할 탭이 있어서, 각 역할별로 별도의 메뉴를 만들 수 있습니다.
+역할별로 메뉴 항목을 다르게 하여 권한에 따라 보여지는 메뉴를 다르게 할 수 있습니다.
+5. 메뉴 항목 설정 상세
+메뉴 항목 이름 : 메뉴에 보여질 텍스트
+대상 페이지 : 메뉴 클릭 시 이동할 페이지 지정
+아이콘 : 메뉴 옆에 표시할 아이콘 설정 가능
+액션 : 메뉴 클릭 시 실행할 커스텀 액션 설정도 가능
+6. 변경 사항 저장 및 실행
+메뉴 구성을 모두 마치고 저장합니다.
+앱을 실행하여 메뉴가 잘 동작하는지 확인합니다.
+요약
+단계	설명
+1. 프로젝트 열기	Mendix Studio Pro에서 프로젝트 실행
+2. Navigation 열기	Project Explorer > Navigation 폴더 열기
+3. 메뉴 추가 및 편집	메뉴 항목 추가, 이름/페이지/아이콘 지정
+4. 역할별 메뉴 설정	사용자 역할에 따라 다른 메뉴 구성 가능
+5. 저장 및 테스트	변경사항 저장 후 앱 실행 확인
+
+
+
+
+
+Mendix Navigation 설정 구체 예시
+가정:
+사용자 역할이 Admin과 User 두 개 있음
+메뉴는 다음과 같이 구성
+Home (모두에게 보여짐)
+Dashboard (Admin만 접근 가능)
+Profile (User만 접근 가능)
+Settings (Admin만 접근 가능)
+1. 사용자 역할 설정 (Roles)
+Project Explorer > Security 열기
+Roles 탭에서 Admin과 User 역할 추가
+2. Navigation 편집 열기
+Project Explorer에서 Navigation 클릭
+기본 Navigation 문서 열기
+3. 기본 메뉴 추가
+Top navigation 영역 보임
++ Add menu item 클릭
+메뉴 이름: Home
+페이지 선택: Home 페이지 (미리 만들어져 있어야 함)
+권한: 모두 (Admin, User 모두 체크)
+4. Admin 메뉴 추가
+다시 + Add menu item 클릭
+메뉴 이름: Dashboard
+페이지 선택: Dashboard 페이지
+권한: Admin 체크 (User는 체크 해제)
+또 메뉴 추가
+이름: Settings
+페이지 선택: Settings 페이지
+권한: Admin 체크
+5. User 메뉴 추가
++ Add menu item 클릭
+메뉴 이름: Profile
+페이지 선택: Profile 페이지
+권한: User 체크
+6. 메뉴 순서 조정
+메뉴 항목 드래그해서 순서 변경 가능
+예) Home - Dashboard - Settings - Profile 순으로 배열
+7. 저장 후 실행
+변경사항 저장
+앱 실행 후, Admin 계정으로 로그인하면 Home, Dashboard, Settings 메뉴가 보임
+User 계정으로 로그인하면 Home, Profile 메뉴만 보임
+메뉴 구성 샘플
+메뉴 이름	연결 페이지	표시 대상 역할
+Home	Home	Admin, User
+Dashboard	Dashboard	Admin
+Settings	Settings	Admin
+Profile	Profile	User
+
+
+추가 팁
+각 메뉴에 아이콘 추가 가능 (메뉴 항목 선택 후 아이콘 설정)
+메뉴 하위 항목 만들기 (메뉴 항목을 우클릭 > Add sub item)
+특정 페이지가 아닌 URL로도 메뉴 연결 가능
