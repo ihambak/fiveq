@@ -1,0 +1,101 @@
+16 Generate를 활용한 CRUD  (일반버전)
+
+Mendix Studio Pro에서 Generate 기능을 활용한 CRUD(Create, Read, Update, Delete) 생성은 매우 편리하게 데이터 관리를 자동으로 설정할 수 있는 방법입니다. 간단히 말해, Mendix가 데이터 모델(Entity) 기반으로 기본적인 화면과 논리를 자동 생성해줘서, 개발자가 직접 일일이 화면이나 액션을 만들지 않아도 CRUD 기능을 빠르게 구현할 수 있게 돕습니다.
+Mendix Studio Pro에서 Generate를 활용한 CRUD 설명
+1. 개념
+CRUD란?
+Create(생성), Read(조회), Update(수정), Delete(삭제) 4가지 기본 데이터 조작 작업.
+Generate란?
+Mendix Studio Pro 내에서 엔티티(Entity)를 선택하면, 해당 엔티티에 대해 기본 CRUD 화면과 마이크로플로우(Microflow)를 자동으로 생성해주는 기능.
+2. CRUD 자동 생성 과정
+도메인 모델(Entity) 설계
+먼저, Mendix 프로젝트 내에서 도메인 모델에 원하는 엔티티와 속성(Attribute)을 설계합니다.
+예: Customer 엔티티에 Name, Email, Phone 등의 속성 추가.
+엔티티 선택 후 Generate 활용
+도메인 모델 화면에서 CRUD 기능을 만들고 싶은 엔티티를 우클릭합니다.
+메뉴에서 Generate Pages 혹은 Generate CRUD를 선택합니다.
+CRUD 템플릿 선택 및 생성
+Mendix가 기본 CRUD 화면 템플릿을 보여줍니다.
+예를 들어, List 페이지(목록 조회), Detail 페이지(상세 조회/수정), New 페이지(새 데이터 생성) 등 기본 UI가 자동으로 만들어집니다.
+생성 버튼을 클릭하면 페이지와 기본 마이크로플로우가 자동 생성됩니다.
+자동 생성된 화면과 마이크로플로우
+List Page: 엔티티 데이터 목록을 조회, 삭제(Delete) 기능 포함.
+Detail Page: 선택한 데이터의 상세 정보 조회 및 수정(Update) 가능.
+New Page: 새로운 데이터 생성(Create) 화면.
+생성된 마이크로플로우는 데이터 저장, 삭제 등을 수행하도록 기본 로직 포함.
+3. 장점
+빠른 프로토타이핑
+기본적인 CRUD 화면을 손쉽게 만들고 바로 테스트 가능.
+개발 생산성 향상
+수작업 UI 개발, 마이크로플로우 작성 시간을 크게 줄여줌.
+커스터마이징 가능
+자동 생성된 화면과 마이크로플로우는 필요에 따라 언제든지 수정 가능.
+4. 간단 예시
+Customer 엔티티에 대해 CRUD 생성 시,
+/CustomerList 페이지: 고객 목록 조회 및 삭제 버튼
+/CustomerDetail 페이지: 고객 상세 정보 조회 및 수정 가능
+/CustomerNew 페이지: 신규 고객 등록 폼
+이 모든 페이지와 연동 마이크로플로우가 자동 생성되어 바로 사용할 수 있음.
+요약
+단계	설명
+1	도메인 모델에서 엔티티 설계
+2	엔티티 선택 → 우클릭 → Generate CRUD 선택
+3	기본 CRUD 템플릿 선택 및 생성
+4	자동 생성된 페이지와 마이크로플로우 확인 및 필요 시 수정
+
+
+
+
+
+
+
+Mendix Studio Pro에서 Generate 활용 CRUD 구체적 단계
+1단계. 도메인 모델 설계
+Mendix Studio Pro에서 프로젝트를 열고, 왼쪽 메뉴에서 Domain Model을 선택.
+새 Entity 생성 (예: Customer)
+엔티티에 속성 추가
+Name (String)
+Email (String)
+Phone (String)
+2단계. 엔티티에서 CRUD Generate 시작
+도메인 모델 화면에서 Customer 엔티티를 우클릭.
+메뉴에서 Generate Pages (또는 Generate CRUD) 선택.
+3단계. 템플릿 선택 화면
+Generate Pages 창이 뜨면서 CRUD 기본 템플릿 옵션을 보여줌.
+보통 다음 3가지 페이지가 생성 대상
+List page: Customer 리스트 조회, 삭제 기능 포함
+Detail page: 선택된 Customer의 상세 조회 및 수정
+New page: 새로운 Customer 생성 폼
+각 페이지 이름을 기본값으로 두거나 수정 가능.
+4단계. 생성 완료 및 확인
+생성 버튼 클릭하면 Mendix가 자동으로
+페이지 3개 (List, Detail, New) 생성
+각 페이지에 필요한 위젯(리스트, 폼, 버튼 등) 배치
+데이터 저장/삭제/업데이트를 처리하는 마이크로플로우(Microflow) 생성
+생성된 페이지들은 Pages 폴더 내에 위치.
+5단계. 화면 구성 예시
+1) List Page (CustomerList)
+데이터 그리드 또는 리스트 뷰 위젯에 Customer 엔티티 데이터 바인딩.
+각 아이템 옆에 Edit 버튼 → 클릭 시 Detail Page로 이동.
+상단 또는 하단에 New 버튼 → 클릭 시 New Page로 이동.
+각 아이템 옆에 Delete 버튼 → 클릭 시 삭제 마이크로플로우 실행.
+2) Detail Page (CustomerDetail)
+Customer 객체 바인딩 폼(Form) 구성.
+이름, 이메일, 전화번호 수정 가능한 텍스트 박스.
+저장 버튼 → 수정한 데이터 저장하는 마이크로플로우 실행.
+뒤로 가기 또는 목록으로 돌아가기 버튼.
+3) New Page (CustomerNew)
+새 Customer 엔티티 객체 바인딩 폼.
+필수 입력 필드 (Name, Email 등).
+저장 버튼 → 새 레코드 생성하는 마이크로플로우 실행.
+취소 버튼 → 목록 페이지로 돌아가기.
+6단계. 동작 테스트
+Run 버튼으로 앱 실행.
+CustomerList 페이지에서 목록 조회, 삭제, 신규 등록, 수정 기능 모두 확인 가능.
+화면별 예시 이미지 (구성 예시)
+페이지 종류	주요 위젯 및 구성
+List Page	데이터 그리드, Edit/Delete 버튼, New 버튼
+Detail Page	폼 위젯(텍스트 박스), Save 버튼, Back 버튼
+New Page	폼 위젯(새 객체), Save 버튼, Cancel 버튼
+
+
