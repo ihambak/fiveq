@@ -1,0 +1,65 @@
+22 Module Security의 이해 및 설정   (일반버전) - 내용보충필요
+
+
+Mendix에서 Module Security는 애플리케이션의 각 모듈(Module) 단위로 사용 권한을 세밀하게 제어할 수 있게 해주는 보안 설정 기능입니다. Mendix는 **Project Security(프로젝트 보안)**와 **Module Security(모듈 보안)**의 이중 보안 구조를 갖고 있으며, Module Security는 해당 모듈 내에서만 적용되는 세부적인 권한 설정입니다.
+✅ 1. Module Security란?
+각 모듈은 자신만의 보안 설정을 가질 수 있습니다.
+모듈에 포함된 페이지(Page), 마이크로플로우(Microflow), 엔티티(Entity), 도메인 모델 접근 권한 등을 **모듈 역할(Module Role)**별로 세분화하여 접근을 제어합니다.
+모듈은 외부에서 직접 접근하지 못하도록 기본적으로 보호되며, 명시적으로 권한을 부여해야만 접근 가능합니다.
+✅ 2. Role에 대한 개념
+🔹 1) Module Role (모듈 역할)
+모듈 내에서 정의되는 역할입니다.
+예: UserModule.Admin, UserModule.Manager
+모듈 내부 요소(마이크로플로우, 페이지 등)에 접근 가능한 권한을 설정합니다.
+🔹 2) Project Role (프로젝트 역할)
+애플리케이션 전체 수준에서 정의되는 역할입니다.
+예: Administrator, Employee, Guest
+특정 모듈의 Module Role에 대한 접근 권한을 매핑하여 전역 역할에 따른 권한을 구성합니다.
+✅ 3. Module Security 설정법 (단계별)
+🔸 Step 1: Module Role 정의
+모듈 내에서 Security를 더블 클릭
+또는 모듈 우클릭 → Security 선택
+Security 창에서 Module Role 탭으로 이동
+New 클릭 → 역할 이름 입력 (예: Admin, Manager)
+역할별로 접근 가능한 항목을 설정:
+Pages: 어떤 페이지에 접근 가능한가?
+Microflows: 어떤 마이크로플로우 실행이 허용되는가?
+Entities: 도메인 모델 접근(Read, Create, Delete, Update)
+🔸 Step 2: Project Role에서 Module Role을 매핑
+프로젝트 루트에서 Project → Security 더블 클릭
+Security Level이 Production 또는 Prototype/Production 상태인지 확인
+User Roles 탭으로 이동 (즉, 프로젝트 역할)
+각 User Role에 대해 Module Roles 설정
+예: Administrator 역할이 UserModule.Admin 역할을 갖도록 설정
+🔸 Step 3: 접근 권한 구성 예시
+Module Role	접근 가능한 페이지	접근 가능한 마이크로플로우	Entity 권한
+Admin	AdminDashboard	CreateUser, DeleteUser	Full CRUD
+Manager	ManagerView	ViewReports	Read only
+
+
+그런 다음 Project Role - Administrator를 UserModule.Admin에 매핑하고,
+Project Role - Manager를 UserModule.Manager에 매핑하면 됩니다.
+✅ 4. 실전 팁
+페이지, 마이크로플로우, 엔티티의 권한을 설정하지 않으면 해당 Module Role은 접근 불가합니다.
+Microflow 권한이 없어도 버튼은 보일 수 있지만, 클릭하면 "Access denied" 오류가 발생합니다.
+재사용 가능한 모듈을 만들 때는 Module Role을 꼭 명확히 설계하여, 외부에서 어떤 권한을 줄지 판단하기 쉽게 만들어야 합니다.
+✅ 5. 예시 그림으로 이해
+pgsql
+복사편집
+Project Role: Administrator
+   └─ UserModule.Admin
+          ├─ Can open Page: AdminPage
+          ├─ Can execute MF: CreateUser
+          └─ Entity: User [Read, Create, Update, Delete]
+
+Project Role: Viewer
+   └─ UserModule.Viewer
+          ├─ Can open Page: ViewPage
+          ├─ Can execute MF: LoadUserData
+          └─ Entity: User [Read only]
+✅ 결론
+Module Role = 로컬 역할, Project Role = 전체 앱에서의 역할
+Module Role은 모듈 내 요소에 접근 제어를 설정하고,
+Project Role은 여러 Module Role을 묶어 사용자에게 부여하는 최종 역할입니다.
+보안 사고 방지를 위해, Module Security는 반드시 설정해야 하며, 불필요한 권한은 제거해야 합니다
+
