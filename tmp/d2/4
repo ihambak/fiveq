@@ -1,0 +1,106 @@
+4 앱 생성(New App), 열기(Open), 가져오기(Import)
+
+🔷 1. 앱 생성 (New App)
+새로운 앱을 만드는 기능으로, 초기 개발의 시작점입니다.
+▶ 접근 방법
+Studio Pro 실행 후 초기 화면에서 New App 클릭
+▶ 주요 방식
+Starter App 선택
+Mendix는 다양한 템플릿 앱(Starter Apps)을 제공합니다.
+예시: Blank App, Workflow App, Task Management App 등
+각 템플릿은 기능/UI가 일부 구현되어 있어 빠른 시작이 가능함.
+앱 이름(Name) 입력
+앱의 고유 이름을 정합니다. 이 이름은 프로젝트 폴더 이름이 되며, Mendix Cloud에서도 이 이름을 사용합니다.
+저장 경로 선택 (Project directory)
+로컬에서 해당 앱이 저장될 폴더 경로를 설정합니다.
+Create App 버튼 클릭
+설정 완료 후 앱이 생성되고, 자동으로 열립니다.
+📌 Tips
+Blank App은 가장 기본적인 구조만 있어 자유롭게 만들고자 할 때 적합합니다.
+템플릿 앱은 예시 데이터와 UI 구성으로 참고하기 좋습니다.
+🔷 2. 앱 열기 (Open App)
+기존에 생성한 앱을 다시 열어 작업을 이어가고자 할 때 사용합니다.
+▶ 접근 방법
+Studio Pro 실행 후 Open App 클릭
+▶ 주요 방식
+A. Open App from Version Control
+Mendix Team Server 또는 GitHub 등에서 관리되고 있는 버전 관리된 앱을 불러올 때 사용합니다.
+Project URL을 입력하거나, Mendix 계정에 연결된 프로젝트를 선택할 수 있습니다.
+최초 열기 시 로컬에 프로젝트가 복제됩니다.
+B. Open App Locally
+로컬 디스크에 이미 존재하는 .mpr 파일(앱 프로젝트 파일)을 열 때 사용합니다.
+보통 이전에 다운로드한 프로젝트나 자신이 만든 앱을 다시 열 때 사용.
+📌 Tips
+로컬에서 열 경우, .mpr 파일 외에 deployment, theme, resources 폴더 등 프로젝트 전체 구조를 포함한 폴더가 있어야 정상 작동합니다.
+🔷 3. 앱 가져오기 (Import App Package)
+외부에서 전달받은 앱 패키지(.mpk) 파일을 열고, 새로운 앱으로 등록할 때 사용합니다.
+▶ 접근 방법
+Studio Pro 실행 후 Import App Package 클릭
+▶ 주요 흐름
+MPK 파일 선택
+.mpk (Mendix Package File)는 앱의 전체 구성(모델, 모듈, 리소스 등)이 포함된 압축 파일입니다.
+앱 이름 및 경로 지정
+가져올 앱의 이름과 저장될 로컬 경로를 설정합니다.
+Import 버튼 클릭 → 앱 생성
+MPK의 내용을 기반으로 앱이 로컬에서 재구성됩니다.
+📌 Tips
+앱 패키지는 보통 백업 용도, 다른 팀원과의 공유, 또는 마켓플레이스에서 다운로드한 앱일 수 있습니다.
+가져온 앱은 기존 앱과 전혀 다른 별도 프로젝트로 인식됩니다.
+🔄 세 기능 요약 비교
+기능	용도	주요 파일/형식
+New App	새 프로젝트 시작	없음 (새로 생성됨)
+Open App	기존 프로젝트 이어서 작업	.mpr, 버전 관리
+Import App	외부에서 받은 앱을 새로운 프로젝트로 등록	.mpk (앱 패키지)
+
+
+필요하시면 각 방식별 예시 스크린샷 구성이나 실습 절차도 도와드릴 수 있어요!
+4o
+나의 말:
+도와줘
+
+
+ChatGPT의 말:
+물론입니다! 아래에 각 기능(앱 생성, 열기, 가져오기)에 대한 실습 단계별 예시와 스크린샷 흐름 설명을 함께 정리해드릴게요. 직접 Mendix Studio Pro에서 따라하면 바로 이해될 수 있도록 구성했습니다.
+✅ 1. 앱 생성 (New App) 실습 가이드
+🌱 새 앱 만들기 단계
+Mendix Studio Pro 실행
+시작 화면에서 ➤ New App 클릭
+Starter App 템플릿 선택
+예: Blank App 선택 → Use this starting point 클릭
+앱 이름 입력
+예: MyFirstApp
+로컬 저장 경로 선택
+예: C:\Mendix\MyFirstApp
+Create App 클릭
+👉 앱이 자동으로 열리고, 도메인 모델, 페이지, 마이크로플로우 등 초기 구성이 완료됨.
+✅ 2. 앱 열기 (Open App) 실습 가이드
+🔁 A. 로컬에 저장된 앱 열기
+Studio Pro 실행 후 ➤ Open App 클릭
+아래에서 ➤ Open App Locally 선택
+.mpr 파일이 포함된 폴더로 이동
+예: C:\Mendix\MyFirstApp\MyFirstApp.mpr
+선택 후 열기(Open) 클릭
+💡 앱이 열리며 이전 작업하던 그대로 복원됨.
+🔁 B. Team Server (클라우드) 앱 열기
+Studio Pro 실행 → Open App → Open App from Version Control
+로그인된 Mendix 계정으로 연결된 앱 목록 표시됨
+원하는 앱 선택 후 → Open 클릭
+로컬에 다운로드 후 열림
+✅ 3. 앱 가져오기 (Import App Package) 실습 가이드
+📦 외부 앱 패키지 가져오기 (.mpk)
+Studio Pro 실행 후 ➤ Import App Package 클릭
+파일 탐색기에서 .mpk 파일 선택
+예: ProjectTemplate.mpk
+앱 이름 지정
+예: ImportedApp
+저장 경로 설정
+예: C:\Mendix\ImportedApp
+➤ Import 클릭
+📂 새로운 Mendix 앱으로 프로젝트 생성됨.
+🖼️ 스크린샷 흐름 정리 (요약 이미지 안내)
+아래와 같은 순서로 화면이 전개됩니다. 직접 실습 시 참고하세요!
+기능	화면 흐름	표시되는 주요 항목
+New App	New App 클릭 → 템플릿 선택 → 앱 이름 입력 → 저장 경로 → Create	템플릿 목록, 폴더 경로 입력창
+Open App	Open App 클릭 → 로컬 or 팀 서버 선택 → .mpr 선택	최근 프로젝트 목록 or 폴더 탐색기
+Import App	Import App Package 클릭 → .mpk 선택 → 이름/경로 지정	Import App 설정 화면
+
