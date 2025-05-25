@@ -63,3 +63,123 @@ Module Role은 모듈 내 요소에 접근 제어를 설정하고,
 Project Role은 여러 Module Role을 묶어 사용자에게 부여하는 최종 역할입니다.
 보안 사고 방지를 위해, Module Security는 반드시 설정해야 하며, 불필요한 권한은 제거해야 합니다
 
+
+
+
+-------------====≠==========
+
+Mendix에서 Module Security는 애플리케이션의 보안 설정 중 모듈 단위로 접근 권한을 세밀하게 설정할 수 있는 기능입니다. 이 기능을 통해 각 모듈의 기능(마이크로플로우, 페이지, 엔티티 등)에 어떤 사용자 역할이 접근 가능한지 정의할 수 있습니다.
+
+
+---
+
+1. Module Security란?
+
+Mendix는 Project-level Security와 Module-level Security의 두 가지 보안 계층을 제공합니다.
+
+Project Security: 전체 애플리케이션 차원에서 역할(User Roles)을 정의합니다.
+
+Module Security: 개별 모듈마다 설정되며, 해당 모듈 내에서 허용할 역할(Module Roles)을 정의합니다.
+
+
+즉, Module Security는 해당 모듈의 내부 리소스 접근을 통제하는 설정입니다.
+
+
+---
+
+2. Module Role이란?
+
+Module Role은 해당 모듈에 대한 권한 역할을 정의하는 것으로, 예를 들어 아래처럼 설정할 수 있습니다:
+
+Module Name	Module Roles
+
+HRM	HRAdmin, HRUser
+Finance	FinAdmin, FinUser
+Common	Viewer, Editor
+
+
+Module Role은 그 모듈 안에서만 유효한 역할이며, Project User Role과 연결되어야 최종 사용자가 해당 권한을 가지게 됩니다.
+
+
+---
+
+3. 설정 방법 (단계별)
+
+3-1. Module Role 정의
+
+1. Mendix Studio Pro에서 해당 모듈을 선택
+
+
+2. Security 폴더 안에 있는 Module Security 더블클릭
+
+
+3. Module Roles 탭에서 + Add 클릭 → 역할 이름 입력
+
+
+4. 각 역할별로 페이지, 마이크로플로우, 엔티티 접근권한을 설정
+
+
+
+3-2. 접근 권한 부여 예시
+
+Pages 탭: 특정 Module Role에게만 페이지 접근 허용
+
+Microflows 탭: 마찬가지로 호출 가능 여부 설정
+
+Entities 탭: 읽기/쓰기/삭제 권한을 필드 단위까지 설정
+
+
+3-3. Project-level User Role과 연결
+
+1. Project > Security로 이동
+
+
+2. 원하는 User Role 선택 (예: Administrator)
+
+
+3. Module Roles 탭에서 해당 모듈에 대한 역할 매핑:
+
+HRM 모듈 → HRAdmin 체크
+
+Finance 모듈 → FinAdmin 체크
+
+
+
+
+이 과정을 통해 사용자 계정이 로그인할 때 할당받는 User Role이 어떤 모듈 권한(Module Role)을 가지는지 결정됩니다.
+
+
+---
+
+4. 권한 구조 예시
+
+가령, 다음과 같은 구조일 수 있습니다:
+
+User Role: Manager
+
+HRM 모듈 → HRAdmin
+
+Finance 모듈 → FinUser
+
+
+
+이렇게 하면 Manager는 HRM 모듈에서는 관리자로, Finance 모듈에서는 일반 사용자 권한만 가집니다.
+
+
+---
+
+5. 팁 및 권장 사항
+
+Common 모듈을 별도로 만들어 공통 마이크로플로우, 페이지, 엔티티를 관리하고, Viewer / Editor 역할 등을 지정
+
+권한을 너무 넓게 주는 것은 지양하고, 최소 권한 원칙(Least Privilege)을 지킬 것
+
+새 모듈을 만들었을 때 반드시 Module Role과 User Role 매핑을 설정해야 사용자 접근이 가능함
+
+
+
+---
+
+필요하면 실습용 예시 모듈 구조나 보안 시나리오도 만들어 드릴 수 있어요. 원하시나요?
+
+
