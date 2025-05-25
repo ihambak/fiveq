@@ -1,0 +1,38 @@
+8 Marketplace 및 Import module package를 통한 설치 (일반버전)
+
+Mendix Studio Pro에서 Marketplace 모듈 설치와 Import Module Package를 통해 모듈을 추가하는 방법을 단계별로 쉽게 설명해드릴게요.
+1. Marketplace를 통한 모듈 설치 방법
+1) Mendix Studio Pro 실행 후 프로젝트 열기
+Mendix Studio Pro를 실행하고, 모듈을 추가하고자 하는 프로젝트를 엽니다.
+2) Marketplace 열기
+상단 메뉴에서 “Marketplace” 버튼을 클릭합니다.
+또는, 좌측 상단 메뉴에서 **“Tools” > “Marketplace”**를 선택할 수도 있습니다.
+3) 필요한 모듈 검색
+Marketplace 창이 뜨면, 검색창에 원하는 모듈 이름이나 키워드를 입력하여 검색합니다.
+예를 들어, “Security”, “Scheduler”, “Excel” 등 필요한 기능 모듈을 검색합니다.
+4) 모듈 선택 및 설치
+원하는 모듈을 선택하면 상세 설명과 버전, 개발자 정보가 나옵니다.
+“Download” 또는 “Add to Project” 버튼을 클릭합니다.
+설치가 완료되면 프로젝트에 모듈이 자동으로 추가됩니다.
+5) 프로젝트에 모듈 반영
+설치가 끝나면, Studio Pro 내의 Project Explorer에서 새로 추가된 모듈을 확인할 수 있습니다.
+필요 시 모듈 내 엔티티, 마이크로플로우 등을 프로젝트에 맞게 수정하여 사용합니다.
+2. Import Module Package (모듈 패키지 가져오기) 방법
+만약 직접 다운로드한 .mpk (Mendix Package) 파일이 있을 경우 아래 절차로 추가합니다.
+1) Mendix Studio Pro에서 프로젝트 열기
+동일하게 프로젝트를 엽니다.
+2) 모듈 패키지 가져오기
+상단 메뉴에서 **“Project” > “Import Module Package”**를 클릭합니다.
+3) .mpk 파일 선택
+파일 탐색기 창이 열리면, 내 컴퓨터에 저장된 .mpk 파일을 찾아 선택합니다.
+4) 모듈 가져오기 진행
+Mendix가 패키지 내용을 읽고, 프로젝트에 모듈을 추가할 준비를 합니다.
+중복되는 요소가 있을 경우 병합 또는 덮어쓰기 옵션이 나오니 필요에 따라 선택하세요.
+5) 모듈 확인 및 사용
+Project Explorer에서 새로 추가된 모듈을 확인할 수 있습니다.
+필요한 부분을 수정하거나 바로 사용할 수 있습니다.
+요약
+방법	절차 요약
+Marketplace 설치	Studio Pro > Marketplace 열기 > 모듈 검색 > 설치 > 모듈 확인 및 사용
+Import Module Package	Studio Pro > Project > Import Module Package > .mpk 선택 > 모듈 확인 및 사용
+
