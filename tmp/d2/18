@@ -1,0 +1,65 @@
+18 데이터 Validation  (일반버전)
+
+
+멘딕스(Mendix)에서 데이터 Validation(데이터 유효성 검사)은 사용자가 입력하는 데이터가 올바른지, 시스템에서 요구하는 조건에 맞는지를 확인하는 과정입니다. 데이터 무결성을 유지하고 오류를 줄이기 위해 매우 중요합니다.
+Mendix 데이터 Validation 종류 및 방법
+1. 속성 수준 Validation (Attribute-level Validation)
+각 엔티티(Entity)의 속성(Attribute)에 대해 기본적인 유효성 검사를 설정할 수 있습니다.
+Mendix 모델러에서 속성 선택 후, 속성의 데이터 타입과 함께 다음 조건을 설정 가능:
+필수 입력 (Required)
+해당 속성에 반드시 값이 입력되어야 함.
+최대/최소 길이 (Max/Min Length)
+문자열의 경우 최대, 최소 길이 제한.
+최대/최소 값 (Max/Min Value)
+숫자 속성의 경우 최소값, 최대값 제한.
+정규식 (Regular Expression)
+문자열 형식에 대해 정규 표현식을 사용해 패턴 검사 가능.
+2. 엔티티 수준 Validation (Entity-level Validation)
+여러 속성 조합에 대해 유효성 검사를 할 때 사용.
+엔티티 단위에서 Business Rule을 적용할 수 있습니다.
+Mendix에서는 주로 Microflow를 사용해 특정 조건을 검사하고, 조건에 맞지 않으면 오류 메시지를 발생시키도록 구현.
+3. 폼(Form) 및 위젯 수준 Validation
+폼 내에서 사용자가 입력할 때 즉시 체크할 수 있는 유효성 검사.
+Mendix 기본 위젯들은 필수 입력 체크, 형식 체크 등을 지원.
+입력 위젯(예: 텍스트 박스, 숫자 입력 박스)에 대해 속성 수준 Validation 조건이 자동으로 반영됨.
+사용자 정의 JavaScript 혹은 Nanoflow를 연결해 더 복잡한 검증도 가능.
+4. 마이크로플로우(Microflow)를 통한 Validation
+복잡한 비즈니스 로직이 필요한 경우, 저장하기 전에 Microflow로 데이터를 검사.
+Microflow 내에서 조건문(IF), 반복문 등을 사용해 다양한 검증 로직 작성 가능.
+오류가 발생할 경우, Show message 액션으로 사용자에게 알림.
+유효성 실패 시 엔티티 저장을 막을 수 있음.
+5. Nanoflow를 통한 실시간 Validation
+Nanoflow는 클라이언트 측에서 실행되는 플로우로, 사용자 입력 즉시 데이터 검증 가능.
+네트워크 호출 없이 빠른 반응.
+실시간 검증 후 오류 메시지 표시 등 UX 향상 가능.
+Mendix 데이터 Validation 적용 방법 예시
+속성 수준 Validation 설정
+Mendix Studio/Modeler에서 엔티티의 속성 선택
+Required 체크박스 선택 (필수값)
+문자열 속성의 경우 Min Length / Max Length 지정
+정규식 패턴을 지정하려면 Regular expression 항목 사용
+Microflow 기반 Validation 예시
+저장 전에 Microflow 실행 설정
+Microflow 내에서 입력 값 조건 확인 (예: 나이가 18 이상인지)
+조건에 맞지 않으면 Show message 액션으로 오류 메시지 표시
+오류가 없으면 엔티티 저장 진행
+mendix
+복사편집
+If Age < 18 Then
+   ShowMessage("만 18세 이상만 가입 가능합니다.")
+Else
+   Commit Object
+End If
+Nanoflow Validation 예시
+입력 폼 위젯에 Nanoflow 연결 → 입력할 때마다 조건 검사 → 조건 미달 시 UI에 즉시 오류 메시지 표시
+Mendix Validation Best Practices
+기본 데이터 타입 및 속성 제약 조건 먼저 설정하기
+(Required, Max Length, Format 등)
+복잡한 조건은 Microflow 또는 Nanoflow 활용
+예를 들어, 중복체크, 다중 속성 연관 검사 등.
+사용자 경험을 위해 Nanoflow를 이용해 실시간 검증 구현 권장
+사용자 입력 즉시 오류를 알려줌.
+Validation 오류 메시지를 명확하고 친절하게 작성
+사용자가 쉽게 이해할 수 있도록.
+모든 입력 검증 로직은 프론트엔드와 백엔드 모두에 구현
+보안 및 데이터 무결성을 위해.
