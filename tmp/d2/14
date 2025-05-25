@@ -1,0 +1,68 @@
+14 Toolbox 위젯 추가 및 설정  (일반버전)
+
+Mendix에서 위젯 추가 및 설정하기 (심화편)
+1. 위젯 추가 방법
+Mendix Studio Pro 좌측의 Toolbox에서 원하는 위젯을 찾는다.
+위젯을 마우스로 끌어다가 페이지 캔버스에 놓는다.
+놓는 위치에 따라 컨테이너 위젯 내부에 포함시키거나, 독립적으로 위치시킬 수 있다.
+2. 위젯 기본 설정
+(1) 속성(Properties) 패널
+위젯을 선택하면 오른쪽에 속성 패널이 열린다.
+위젯마다 설정 가능한 속성이 다르며, 대표적인 설정 항목은 다음과 같다.
+설정 항목	설명
+Name / ID	위젯 식별용 이름. 스크립트나 커스텀 코드 연동 시 필요할 수 있음.
+Data Source	위젯에 표시할 데이터 연결. 엔티티, 리스트, 마이크로플로우 결과 등.
+Style / CSS Class	CSS 클래스명 지정. 커스텀 스타일 적용 가능.
+Events	클릭, 변경 등 사용자 동작에 따른 마이크로플로우 실행 설정.
+Visibility	조건부 표시 설정 (예: 특정 조건일 때만 위젯 보이도록).
+Tooltip / Help Text	마우스 오버 시 보여줄 설명 텍스트.
+
+
+3. 위젯별 주요 설정 예시
+(1) 텍스트 박스(Text Box)
+Data source: 엔티티의 속성(Property) 바인딩
+Read-only: 편집 가능 여부 설정
+Placeholder: 입력란에 회색으로 표시할 힌트 텍스트
+Validation: 필수 입력 여부, 정규식(Regex) 검증 설정 가능
+(2) 버튼(Button)
+Caption: 버튼에 표시될 텍스트 지정
+On click: 버튼 클릭 시 동작 설정
+Call a microflow: 특정 마이크로플로우 실행
+Show page: 다른 페이지로 이동
+Show popup: 팝업창 띄우기
+Enabled condition: 버튼 활성화/비활성화 조건
+(3) 데이터 그리드(Data Grid)
+Data source: 리스트 형태의 엔티티 혹은 마이크로플로우 결과 바인딩
+Columns 설정: 보여줄 컬럼 선택 및 순서 조정
+Sortable: 컬럼별 정렬 가능 여부
+Paging: 페이지네이션 사용 여부
+Selection mode: 단일 선택 / 다중 선택
+(4) 리스트 뷰(List View)
+Data source: 리스트 바인딩
+Template: 각 리스트 아이템을 어떻게 표시할지 구성
+Conditional visibility: 아이템별 조건에 따른 표시 여부 조정 가능
+4. 고급 설정
+(1) 조건부 표시 및 동적 속성
+위젯의 Visible 속성에 조건식 넣기 (예: [currentUser/isAdmin = true])
+위젯 속성에 마이크로플로우 혹은 표현식을 넣어 동적으로 값 변경 가능
+(2) 데이터 바인딩과 양방향 바인딩
+입력 위젯(텍스트 박스, 체크박스 등)은 기본적으로 엔티티 속성에 양방향 바인딩 (사용자 입력 → 엔티티 저장)
+출력 위젯(라벨, 이미지 등)은 단방향 바인딩 (엔티티 → 화면 표시)
+(3) 마이크로플로우와의 연동
+위젯 이벤트에서 마이크로플로우 호출 가능
+마이크로플로우 실행 후 결과에 따라 화면 갱신, 메시지 표시, 페이지 이동 가능
+마이크로플로우 파라미터로 위젯에 바인딩된 데이터를 전달 가능
+(4) 스타일 커스터마이징
+위젯에 CSS 클래스 지정 후 프로젝트에 CSS 추가 가능
+Mendix 테마 수정 시 위젯 기본 스타일도 함께 변경 가능
+5. 예제: 버튼 위젯 설정
+버튼을 추가
+Caption에 "저장" 입력
+On click → Call a microflow → SaveCustomerInfo 선택
+Enabled condition에 [Customer/Status != 'Inactive'] 넣어 비활성화 조건 지정
+Tooltip에 "고객 정보를 저장합니다." 입력
+6. 마켓플레이스 위젯 추가 및 설정
+Mendix 마켓플레이스에서 위젯 다운로드
+프로젝트 내 Widgets 폴더에 추가
+Toolbox에 자동 등록되어 페이지에 추가 가능
+속성은 해당 위젯 설명서 참고
