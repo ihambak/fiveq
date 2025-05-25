@@ -1,0 +1,105 @@
+3 Github연동(Open Private App) 및 멘딕스 설정 및 사용(clone, pull, commit, push)
+
+✅ 사전 준비사항
+GitHub 계정 생성 및 로그인
+GitHub에 Private Repository 생성
+Git 설치
+Git 다운로드 후 설치
+Mendix Studio Pro 설치
+Git 기능은 Mendix Studio Pro에서 기본 지원합니다.
+🔐 1. GitHub Personal Access Token 생성
+GitHub에서 Private 저장소 접근을 위해 Personal Access Token (PAT) 을 발급해야 합니다.
+발급 방법:
+GitHub 접속 → 오른쪽 상단 프로필 > Settings
+좌측 메뉴에서 Developer settings → Personal access tokens → Tokens (classic)
+Generate new token 클릭
+Scopes 선택
+repo 체크 (Private repo 접근 허용)
+Generate token 클릭 → 생성된 토큰을 복사해서 안전하게 저장
+📥 2. Mendix Studio Pro에서 GitHub 저장소 Clone 하기
+Mendix Studio Pro 실행
+Version Control > Download from Version Control 클릭
+Repository URL 입력 (예: https://github.com/username/my-private-mendix-app.git)
+프로젝트 이름 / 저장 경로 지정
+Git 인증 정보 입력
+Username: GitHub 사용자 ID
+Password: 위에서 발급한 Personal Access Token
+Download 클릭 → 로컬로 Clone됨
+🔁 3. 변경사항 관리 (Pull / Commit / Push)
+1) 변경사항 가져오기 (Pull)
+App > Update 클릭 → 원격 저장소의 최신 변경사항을 가져옴
+2) 변경사항 저장 (Commit)
+변경 후 → App > Commit 클릭
+메시지 입력 후 Commit
+3) 원격 저장소에 업로드 (Push)
+Commit 후 자동으로 Push 여부 묻거나
+또는 App > Commit 창에서 Commit and Push 체크
+✏️ 4. 기존 Mendix 앱을 GitHub에 업로드
+Mendix Studio Pro에서 로컬 앱 열기
+App > Manage Version Control → Enable Version Control
+Git 저장소 URL 입력 (https://github.com/username/my-private-mendix-app.git)
+인증정보 입력
+완료 후 Commit and Push로 최초 업로드
+🛠️ 주의사항
+Private 저장소는 반드시 PAT를 사용해야 인증이 됩니다.
+Mendix는 Git LFS(Large File Storage)를 사용하지 않으므로, 저장소에 이 기능을 설정하지 않도록 주의
+main, master 브랜치 명 주의: GitHub 기본 브랜치는 main인 경우가 많습니다.
+🎁 팁: GitHub과의 연동 확인
+bash
+복사편집
+git remote -v
+→ Mendix 프로젝트 폴더에서 실행 시 remote 주소 확인 가능
+원하는 경우 GitHub에 Push된 앱을 협업자와 함께 Mendix에서 열고 관리할 수도 있습니다.
+
+
+
+🧩 1. Mendix + GitHub 협업 구조
+Mendix는 내부적으로 Git을 사용하므로 일반적인 Git 협업 방식이 적용됩니다. Mendix Studio Pro는 시각적 툴이기 때문에 충돌을 최소화하는 전략이 필요합니다.
+🧑‍🤝‍🧑 2. 협업을 위한 기본 구성
+협업 흐름 예시:
+공식 원격 저장소 (GitHub) 생성
+팀원들은 clone하여 각자 작업
+변경사항은 commit + push
+Merge 요청(Pull Request) 혹은 pull로 병합
+주기적으로 update (pull)로 최신 반영
+필수 역할:
+Repository 관리자: 브랜치/권한 관리, 최종 병합 담당
+개발자: 기능 단위 개발 및 commit/push 수행
+리뷰어: PR 리뷰 및 품질 보장
+🌱 3. 브랜치 전략
+Mendix 프로젝트는 XML 기반이므로 merge conflict 발생 시 복잡할 수 있습니다. 이를 최소화하려면 안정적이고 규칙 있는 브랜치 전략이 필요합니다.
+✅ 추천 브랜치 전략: Git Flow (단순화 버전)
+브랜치	용도	사용 대상
+main or master	배포용/운영 버전	모든 팀원 (읽기 전용처럼 사용)
+develop	통합 개발 브랜치	모든 팀원
+feature/XXX	기능 단위 개발	개별 팀원
+hotfix/XXX	긴급 수정	팀 전체
+release/XXX	배포 전 QA	QA 팀, 리더
+
+
+📌 예시 브랜치 흐름:
+develop에서 feature/login-page 생성
+작업 완료 후 → commit + push
+GitHub에서 Pull Request (PR) 생성 → 리뷰 → develop에 병합
+develop에서 QA 완료 후 → release/v1.0 생성 → 테스트
+이상 없으면 → main에 병합
+⚠️ 4. 충돌 방지를 위한 팁
+하루 1번 이상 pull/update 필수
+동일 페이지 또는 마이크로플로우를 동시에 수정하지 않기
+작은 단위로 commit → 원인 추적 쉬움
+commit 메시지는 명확하게 (예: feat: 사용자 로그인 기능 추가)
+🔒 5. 권한 및 관리
+GitHub에서 Repository의 Collaborator 또는 Team 설정으로 권한 조절
+main 브랜치에 직접 push 방지 (보호 브랜치 설정)
+코드 리뷰 강제(Pull Request 후 Merge만 가능하도록 설정)
+🧪 6. 테스트/배포 전략 (선택)
+release 브랜치에 push → 자동 배포 테스트 환경으로 전송 (CI/CD 연동 가능)
+main에 병합 시 → 운영 서버로 배포
+📄 정리
+항목	권장
+Git 브랜치 전략	main / develop / feature/*
+병합 방법	PR(Pull Request) 및 코드 리뷰
+충돌 방지	기능 단위 브랜치, 자주 Pull
+인증 방식	PAT를 사용한 GitHub 인증
+권한 관리	GitHub Collaborator 또는 Team 설정
+자동화 (선택)	GitHub Actions, CI/CD 도입
