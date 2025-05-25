@@ -1,0 +1,82 @@
+11 Entity (PE / NPE) / Association 이해 및 생성(Create)  (일반버전)
+
+Mendix에서 Entity와 Association 개념부터 쉽게 설명하고, Persistable / Non-Persistable Entity 생성 및 Association 추가 방법까지 단계별로 알려줄게요.
+1. Entity와 Association이란?
+Entity (엔티티)
+데이터베이스의 테이블과 비슷한 개념이에요.
+하나의 개체(예: 고객, 주문, 상품 등)를 표현하는 데이터 단위입니다.
+엔티티 안에는 이름, 속성(필드)이 있어요.
+예를 들어, Customer 엔티티는 고객 이름, 이메일, 전화번호 같은 속성을 가질 수 있어요.
+Association (연관관계)
+두 개의 엔티티 간의 관계를 나타내요.
+예를 들어, Customer와 Order라는 엔티티가 있을 때, 고객이 주문을 여러 개 할 수 있으므로, 이 둘을 연결하는 Association을 만듭니다.
+Association은 일종의 외래키 관계라고 생각하면 쉬워요.
+2. Persistable vs Non-Persistable Entity
+Persistable Entity
+데이터베이스에 실제로 저장되는 엔티티입니다.
+사용자가 저장, 수정, 삭제할 수 있는 데이터가 여기에 포함됩니다.
+예: 고객, 주문, 제품 같은 실제 데이터
+Non-Persistable Entity
+데이터베이스에 저장되지 않는 엔티티입니다.
+주로 일시적 데이터, 계산 결과, 외부 API 호출 결과 등을 임시로 담을 때 사용해요.
+예: 검색 조건, 임시 계산 값, 화면 내에서만 사용하는 데이터 등
+3. Mendix에서 Persistable / Non-Persistable Entity 생성 방법
+(1) Persistable Entity 생성하기
+Mendix Studio Pro에서 Domain Model 탭 열기
+도메인 모델 빈 공간에서 오른쪽 클릭 → Add Entity 클릭
+새 엔티티 이름 지정 (예: Customer)
+엔티티 속성 추가: 오른쪽 클릭 → Add Attribute
+속성 이름, 데이터 타입 설정 (예: Name - String, Age - Integer)
+이 엔티티는 기본적으로 Persistable 상태입니다. (자동으로 DB에 저장됨)
+(2) Non-Persistable Entity 생성하기
+도메인 모델에서 엔티티 추가하는 것과 동일하게 Add Entity 클릭
+이름 지정 (예: SearchCriteria)
+엔티티 속성 추가
+엔티티를 선택한 상태에서 속성 창에서 Is Persistable 옵션을 체크 해제 (체크 해제하면 Non-Persistable Entity가 됨)
+이 엔티티는 DB에 저장되지 않고, 임시 데이터로 사용됩니다.
+4. Association 추가하는 방법
+두 엔티티가 있을 때, 도메인 모델에서 엔티티 간의 빈 공간을 클릭해서 드래그해 연결선을 그립니다.
+연결선이 생기면, 오른쪽 속성 창에서 Association 설정을 할 수 있어요.
+Association 이름 정하고, 양쪽 카디널리티 설정하기 (예: 1-to-many, many-to-many 등)
+예: 한 고객(Customer)은 여러 주문(Order)을 가질 수 있으니 1..* 로 설정 가능
+저장하면 두 엔티티 사이에 Association이 추가됩니다.
+정리
+구분	설명	생성방법 요약
+Entity	데이터 단위, DB의 테이블과 유사	도메인 모델에서 엔티티 추가
+Persistable Entity	DB에 저장되는 실제 데이터 엔티티	엔티티 기본 생성 시 자동 Persistable
+Non-Persistable Entity	DB에 저장되지 않는 임시 데이터 엔티티	엔티티 생성 후 Is Persistable 해제
+Association	두 엔티티 간 관계, 외래키 개념	도메인 모델에서 두 엔티티 연결선 그리기 후 속성 설정
+
+
+
+Mendix에서 Persistable / Non-Persistable Entity 생성 및 Association 추가
+1. Persistable Entity 생성하기
+도메인 모델 열기
+프로젝트 내 Domain Model 탭 클릭
+엔티티 추가
+빈 영역에서 오른쪽 클릭 → Add Entity 클릭
+엔티티 이름 입력 (예: Customer)
+속성 추가
+엔티티 선택 후 오른쪽 클릭 → Add Attribute
+이름(예: Name), 타입(String) 지정
+원하는 속성을 계속 추가
+엔티티가 기본 Persistable 상태임
+속성 창에서 Is Persistable이 기본 체크되어 있음 (DB 저장됨)
+2. Non-Persistable Entity 생성하기
+엔티티 생성
+위와 동일하게 Add Entity 후 이름 지정 (예: SearchCriteria)
+속성 추가
+예: SearchText (String 타입) 추가
+Persistable 해제
+엔티티 선택 후 속성 창에서 Is Persistable 체크 해제
+이렇게 하면 이 엔티티는 DB에 저장되지 않음
+3. Association 추가하기
+엔티티 두 개 준비
+예: Customer (Persistable), Order (Persistable) 준비
+Association 연결선 그리기
+Customer 엔티티에서 마우스 드래그 → Order 엔티티까지 선을 그려 연결
+Association 설정
+연결된 선 클릭 → 오른쪽 속성 창에서 이름 입력 (예: Customer_Orders)
+Cardinality 설정 (예: 한 고객 1..* 주문)
+Association 완료
+저장 후 도메인 모델에 관계선이 나타남
