@@ -1,0 +1,60 @@
+2 Mendix Studio Pro 구성 및 개발 환경 설정
+
+🔷 Mendix Studio Pro란?
+Mendix Studio Pro는 Mendix 앱을 로컬에서 개발할 수 있는 Windows 전용 데스크탑 IDE입니다.
+Studio Pro를 사용하면 복잡한 로직, 데이터 모델링, 사용자 인터페이스, 외부 연동 등을 포함한 전체 애플리케이션을 개발 및 테스트할 수 있습니다.
+🔹 Studio Pro 화면 구성
+Studio Pro는 다음과 같은 주요 구성 요소로 나뉘어 있습니다:
+1. Project Explorer (왼쪽)
+애플리케이션의 구조를 트리 형태로 보여줌
+모듈(Module), 페이지(Page), 마이크로플로우(Microflow), 도메인 모델(Domain Model) 등을 관리
+2. Canvas / Editor (가운데)
+실제 작업 공간
+페이지 디자인, 마이크로플로우 설계, 도메인 모델 작성 등 대부분의 작업은 여기에서 수행
+3. Properties Pane (오른쪽)
+선택한 컴포넌트의 속성(Property)을 설정
+UI 요소의 텍스트, 색상, 동작, 데이터 바인딩 등을 수정 가능
+4. Error List & Console (하단)
+앱 실행 시 발생하는 오류, 경고, 메시지 등을 표시
+로컬 서버 실행 로그도 여기서 확인
+5. Toolbar (상단)
+앱 실행(▶), 배포, 빌드, 디버그 등 주요 기능 버튼
+“Version Control” 메뉴로 팀 협업 시 소스 관리 가능
+🔶 로컬 개발 환경 설정 방법 (Step by Step)
+✅ 1단계: Mendix Studio Pro 설치
+공식 사이트 접속
+최신 버전의 Mendix Studio Pro 설치 파일 다운로드
+설치 프로그램 실행 → 설치 완료
+📌 주의: Mendix는 Windows에서만 Studio Pro를 지원합니다 (Mac은 별도 가상 환경 필요)
+✅ 2단계: Mendix 계정 만들기 및 로그인
+https://signup.mendix.com에서 계정 생성
+Studio Pro 설치 후 첫 실행 시 로그인 필요
+✅ 3단계: 새 프로젝트 만들기 또는 기존 프로젝트 열기
+새 프로젝트(New App)
+→ 빈 앱 템플릿 또는 Marketplace 템플릿 선택 후 시작
+기존 프로젝트(Open App)
+→ Mendix Team Server에서 가져오거나 .mpr 파일 열기
+✅ 4단계: 로컬 테스트 실행
+상단 Toolbar에서 ▶ Run Locally 클릭
+Studio Pro가 내장 웹 서버를 실행하고, 기본 브라우저로 앱을 엽니다
+브라우저에서 http://localhost:8080으로 앱 접속
+✅ 5단계: 개발 진행
+도메인 모델 → 데이터 구조 설계
+페이지 → 화면 구성
+마이크로플로우 → 앱 로직 구성
+액세스 룰 → 권한 설정
+🔄 선택 사항: Git 기반 협업 설정
+Studio Pro는 **Mendix Team Server(Git 기반)**를 지원
+App → Version Control → Enable Team Server로 팀 협업 가능
+📌 필수 설치 사항 요약
+항목	필요 여부	비고
+Windows OS	✅ 필수	Studio Pro는 Windows에서만 지원
+Mendix Studio Pro	✅ 필수	공식 링크
+Mendix 계정	✅ 필수	로그인 및 앱 만들기 필요
+브라우저(Chrome 등)	✅ 권장	로컬 테스트 시 사용
+
+
+✅ 마무리 요약
+Mendix Studio Pro는 시각적인 로컬 개발을 위한 주요 도구입니다.
+프로젝트 탐색기, 편집기, 속성창, 에러 로그창 등을 중심으로 구성되어 있습니다.
+설치 후에는 앱 생성 → Run Locally를 통해 바로 테스트할 수 있습니다.
