@@ -1,0 +1,76 @@
+17 Microflow를 활용한 CRUD  (일반버전)
+
+
+Mendix Microflow를 활용한 CRUD 구현 설명
+1. Microflow란?
+Mendix의 시각적 프로그래밍 도구로, 플로우 차트처럼 동작 로직(비즈니스 로직)을 구성하는 기능.
+버튼 클릭, 데이터 변경, 조건 분기, 호출, 저장 등 앱 동작을 직접 설계 가능.
+JavaScript나 다른 언어를 몰라도 Drag & Drop으로 로직 작성 가능.
+2. Microflow를 활용한 CRUD 구현 단계
+2-1. Create (생성)
+새 데이터 생성 플로우 작성
+새 객체 생성(Create Object 액션)
+폼에 바인딩하여 사용자 입력 받음
+저장(Save Object 액션) 후 다음 화면으로 이동
+예시 Microflow
+Create Object → 새 Customer 객체 생성
+새 객체를 Edit 폼 페이지에 넘김
+사용자가 입력 후 Save 버튼 클릭 시
+Save Object 액션으로 DB에 저장
+목록 페이지로 이동
+2-2. Read (조회)
+데이터 조회는 대부분 기본 데이터 뷰(Data View) 위젯과 데이터 소스 설정으로 처리.
+하지만, Microflow에서 특정 조건의 데이터를 불러와서 화면에 전달할 수도 있음.
+예를 들어 특정 고객 정보 상세 조회 시, Retrieve 액션으로 데이터를 불러오고 화면에 전달.
+2-3. Update (수정)
+조회된 객체를 Data View에 바인딩하여 폼으로 보여줌
+사용자가 수정 후 Save 버튼 클릭 시 Microflow 실행
+Save Object 액션으로 변경 내용 DB 저장
+2-4. Delete (삭제)
+삭제할 객체 선택 후 버튼 클릭
+버튼에 연결된 Microflow에서 Delete Object 액션으로 데이터 삭제
+삭제 후 목록 갱신 또는 특정 페이지로 이동
+3. Microflow 활용 CRUD 예시 시나리오
+A) Create Microflow
+새 버튼 클릭 시 실행되는 Microflow
+flow
+복사편집
+Create Object (Customer)
+Show Page (Edit Customer Form) - 신규 객체 전달
+Edit Form 페이지의 저장 버튼에 연결된 Microflow
+flow
+복사편집
+Save Object (Customer)
+Close Page or Show Page (Customer List)
+B) Update Microflow
+Edit 페이지에서 저장 버튼 클릭 시 실행
+flow
+복사편집
+Save Object (Customer)
+Close Page or Show Page (Customer List)
+C) Delete Microflow
+Delete 버튼 클릭 시 실행
+flow
+복사편집
+Delete Object (Selected Customer)
+Refresh Data View or Show Page (Customer List)
+4. Microflow 내 주요 액션 소개
+액션명	역할
+Create Object	새 엔티티 객체 생성
+Retrieve Object	DB에서 객체 검색
+Change Object	객체 속성 변경
+Save Object	객체 저장 (Create/Update 모두 해당)
+Delete Object	객체 삭제
+Show Page	페이지 표시
+Close Page	현재 페이지 닫기
+Decision	조건 분기
+
+
+5. 장점 및 특징
+자세한 동작 제어 가능
+복잡한 조건 처리, 검증 로직, 외부 서비스 호출 가능.
+UI와 비즈니스 로직 분리
+UI는 폼과 페이지로, 로직은 Microflow로 깔끔하게 분리.
+확장성 우수
+단순 CRUD 이상으로 다양한 기능 추가 가능.
+
