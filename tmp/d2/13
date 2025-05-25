@@ -1,0 +1,38 @@
+13 Properties / Styling 설정    (일반버전)
+
+Mendix에서 Properties / Styling 설정 방법
+1. Properties 설정
+**Properties(속성)**란?
+선택한 위젯(예: 버튼, 텍스트박스, 리스트 등)의 동작이나 내용, 데이터 바인딩, 표시 조건 등 기능적인 부분을 설정하는 곳입니다.
+Properties 설정 방법
+페이지 디자인 화면에서 원하는 위젯을 클릭합니다.
+오른쪽 패널에 Properties 탭이 나타납니다.
+여기서 위젯별로 다양한 속성을 설정할 수 있습니다.
+예를 들어, 버튼의 경우:
+Caption (버튼에 표시될 텍스트)
+On click (버튼 클릭 시 실행할 액션)
+Visible (보이기/숨기기 조건)
+텍스트 박스의 경우:
+Data source (연결할 엔티티 속성)
+Placeholder (입력란에 표시될 안내 텍스트)
+2. Styling 설정
+**Styling(스타일)**이란?
+위젯의 모양새(크기, 색상, 폰트, 마진 등)를 설정하는 부분입니다.
+Styling 설정 방법
+위젯을 선택하면 오른쪽 패널 상단에 Styling 탭이나 섹션이 있습니다.
+여기서 다음을 설정할 수 있습니다:
+Class (CSS 클래스 이름 입력)
+Mendix 앱에 기본적으로 제공되는 클래스 이름을 넣거나,
+내가 직접 만든 커스텀 CSS 클래스를 넣어 디자인을 바꿀 수 있습니다.
+Appearance 관련 속성
+예: 너비(Width), 높이(Height), 패딩, 마진, 정렬(Alignment) 등
+Conditional Styling (조건부 스타일)
+특정 조건에 따라 스타일을 다르게 지정할 수 있습니다.
+예를 들어, 상태가 “완료”일 때 글자색을 초록색으로 변경 등
+3. 스타일링 예시
+버튼 위젯을 선택 → Properties에서 Caption을 "저장"으로 바꿈
+Styling에서 Class에 btn-primary 입력 → 버튼 색상이 파란색으로 변경됨 (Mendix 기본 클래스 중 하나)
+Conditional styling 추가 → 특정 조건 만족 시 배경색을 빨간색으로 변경 가능
+4. 커스텀 스타일 적용
+프로젝트 내 theme 폴더에 CSS/SCSS 파일을 만들어 직접 스타일을 정의할 수 있습니다.
+정의한 CSS 클래스 이름을 위젯 Styling → Class에 입력해 사용합니다.
