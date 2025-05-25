@@ -1,0 +1,108 @@
+6 앱 기본 설정 및 초기 구성 (App 'App Name' > Settings > Configuration / Runtime)
+
+Mendix Studio Pro에서 앱 기본 설정(App Settings) 및 초기 구성을 설정하는 방법을 단계별로 정리해드릴게요. 이 작업은 보통 앱을 처음 만들었을 때 필수적으로 진행하게 됩니다.
+🔧 1. 앱 기본 설정(App Settings) 접근하기
+Mendix Studio Pro를 실행합니다.
+원하는 앱을 열거나 새 앱을 생성합니다.
+왼쪽 상단 메뉴에서 Project > Settings로 들어갑니다.
+또는 Project Explorer 창에서 앱 이름(예: MyFirstApp)을 우클릭한 후 Settings를 선택해도 됩니다.
+⚙️ 2. Settings 항목 설명
+Settings 창에는 여러 탭이 있는데, 주요 탭을 중심으로 설명드릴게요.
+① General (일반 설정)
+Name: 앱 이름
+Default Language: 기본 언어 선택 (예: Korean, English)
+Default Time Zone: 앱 기본 시간대 설정
+✅ 일반적으로 여기서 앱 이름, 기본 언어, 시간대를 설정하는 것이 초기 구성의 핵심입니다.
+② Runtime
+After startup / Before shutdown: 앱 시작 또는 종료 시 실행할 마이크로플로우 설정
+First login microflow: 최초 로그인 후 실행할 마이크로플로우 지정
+Allow users to sign in anonymously: 익명 로그인 허용 여부
+✅ 앱 동작 흐름(특히 로그인 직후 동작 등)을 여기서 제어할 수 있습니다.
+③ Navigation
+앱의 네비게이션 구조를 정의합니다.
+어떤 역할에 어떤 페이지를 보여줄지 설정합니다.
+✅ 관리자, 일반 사용자 등 역할별 메뉴 구성이 필요할 경우 여기를 설정합니다.
+④ Languages
+앱에서 사용할 수 있는 언어 추가 및 제거
+기본 언어 변경도 가능
+⑤ Model options
+변경 사항 저장 시 수행할 유효성 검사 관련 설정
+⑥ Certificates, Custom Settings 등
+배포나 보안 관련 고급 설정이 필요할 경우 사용
+✅ 예시: 앱 초기 구성 흐름 요약
+Project > Settings 열기
+General 탭에서 앱 이름, 언어, 시간대 설정
+Runtime 탭에서 앱 실행 시 필요한 마이크로플로우 지정 (선택사항)
+Navigation 탭에서 역할별 메뉴 설정 (권한 관리 필요 시)
+Languages 탭에서 다국어 지원 설정 (필요시)
+
+
+Mendix Studio Pro에서 Project > Settings는 앱 전체의 동작 방식, 환경 구성, 언어, 시간대, 사용자 권한 등 중요한 설정을 조절하는 핵심 메뉴입니다. 각 탭별로 무엇을 설정할 수 있고, 언제 사용하는지 자세히 설명드릴게요.
+📌 Project > Settings 전체 구조
+메뉴 경로: 상단 메뉴 > Project > Settings
+열면 탭이 여러 개 보입니다. 주요 탭은 다음과 같습니다:
+General
+Runtime
+Client
+Model options
+Languages
+Custom settings
+Certificates
+Theme
+Runtime settings (Debug 등)
+Error handling (버전에 따라 있음)
+1. 🧾 General (일반 설정)
+Name: 앱 이름. 예: MyApp
+Default Language: 앱 기본 언어. 예: Korean, English
+Default Time zone: 앱 시간대. 예: Asia/Seoul
+Enable multi-language: 다국어 지원 여부 체크박스
+✅ 앱의 이름, 주 언어, 시간대 같은 기본 정보를 설정하는 곳입니다. 앱을 처음 만들면 반드시 설정해야 합니다.
+2. ⚙ Runtime (런타임 설정)
+After startup: 앱 시작 시 실행할 마이크로플로우
+Before shutdown: 앱 종료 직전 실행할 마이크로플로우
+First login microflow: 사용자가 처음 로그인할 때 실행할 마이크로플로우
+Enable anonymous users: 익명 사용자 사용 여부
+Login behavior: 로그인 관련 동작 제어
+✅ 앱 실행 흐름을 통제하거나, 로그인 후 첫 페이지 이동, 초기 데이터 세팅 등을 제어할 수 있는 핵심 설정입니다.
+3. 🖥 Client (클라이언트 관련 설정)
+Timeouts: 세션 타임아웃 설정
+Enable WebSocket: 웹소켓 기능 사용 여부
+Block pages on network errors: 네트워크 에러 시 동작 제어
+✅ 사용자 경험에 영향을 주는 부분으로, 세션 유지 시간이나 에러 상황에서의 처리 방식을 조정합니다.
+4. 📐 Model options (모델링 관련 설정)
+Check consistency before committing: 저장 전에 유효성 검사 여부
+Auto-save widgets' captions: 위젯의 레이블 자동 저장
+Use deprecated widgets: 더 이상 권장되지 않는 위젯 허용 여부
+✅ 개발할 때 불필요한 오류를 방지하려면 유효성 검사를 켜두는 것이 좋습니다.
+5. 🌐 Languages (언어 설정)
+앱에서 사용할 수 있는 언어 추가/제거
+기본 언어 설정
+다국어 텍스트 관리 가능
+✅ 다국어 앱을 만들 때 반드시 여기에 언어를 추가하고, 각 언어별 텍스트를 관리해야 합니다.
+6. 🧩 Custom settings (사용자 정의 설정)
+런타임에 전달할 커스텀 환경변수 설정
+예: 외부 API 키, 전용 포트 번호 등
+✅ 운영 환경 배포 시 자주 사용합니다. 예: MyApp.CustomSetting = true
+7. 📜 Certificates (인증서 관리)
+HTTPS 연결 시 사용할 인증서 등록
+외부 서비스와의 안전한 통신을 위해 필요
+✅ 보안 연동 시 필수 (예: 외부 API 호출, 인증 서비스 연동 등)
+8. 🎨 Theme (테마 설정)
+앱의 기본 테마, 색상, 스타일 설정
+사용자 정의 테마 파일도 연결 가능
+✅ 사용자 UI/UX를 꾸미고 싶을 때 사용
+9. 🧪 Runtime settings / Debug (디버깅용 설정)
+로그 레벨(Level), 디버깅 포트 설정 등
+예: 특정 로그만 출력되게 설정
+✅ 개발 및 테스트 중 필요한 디버깅 정보 제어에 유용
+10. ⚠️ Error Handling (에러 처리 정책, 일부 버전)
+전역 에러 처리 마이크로플로우 지정 가능
+✅ 정리: 앱 초기 구성 시 꼭 확인해야 할 탭
+설정 구분	필수 확인 탭	설명
+앱 이름, 언어	General	앱 이름, 언어, 시간대 설정
+로그인 후 흐름	Runtime	로그인 직후 마이크로플로우 설정
+역할별 메뉴	Navigation (별도 설정)	사용자 역할에 따라 메뉴 보이기
+다국어	Languages	여러 언어를 지원할 경우 추가
+개발 편의	Model options	저장 전 유효성 검사 등 설정
+
+
