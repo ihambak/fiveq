@@ -1,0 +1,28 @@
+import java.util.Random;
+
+public class RandomEmailGenerator {
+
+    private static final String[] DOMAINS = {"gmail.com", "naver.com", "daum.net", "example.com"};
+    private static final String CHARACTERS = "abcdefghijklmnopqrstuvwxyz0123456789";
+    private static final int USERNAME_LENGTH = 8;
+
+    public static String generateRandomEmail() {
+        Random random = new Random();
+        StringBuilder username = new StringBuilder();
+
+        for (int i = 0; i < USERNAME_LENGTH; i++) {
+            int index = random.nextInt(CHARACTERS.length());
+            username.append(CHARACTERS.charAt(index));
+        }
+
+        String domain = DOMAINS[random.nextInt(DOMAINS.length)];
+        return username.toString() + "@" + domain;
+    }
+
+    public static void main(String[] args) {
+        // 예시: 10개의 랜덤 이메일 생성
+        for (int i = 0; i < 10; i++) {
+            System.out.println(generateRandomEmail());
+        }
+    }
+}
