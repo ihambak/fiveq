@@ -1,0 +1,15 @@
+예제: 마이크로플로우 내 구현 순서
+
+1. Retrieve → From database → Entity: ProductList
+
+
+2. List Operation → Length → $ProductListCount
+
+
+3. Expression → floor(random() * $ProductListCount)
+
+
+4. List Operation → Get → Index: 위 Expression 결과
+
+
+5. 결과 저장 (변수에 할당 또는 출력)
