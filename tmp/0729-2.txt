@@ -1,0 +1,196 @@
+
+---
+
+✅ 시나리오
+
+외부 시스템에서 고객과 주문 정보를 JSON으로 보내오고, 우리는 그것을 Mendix에 저장합니다.
+또한, 저장된 데이터를 외부에 다시 JSON 형식으로 제공해야 합니다.
+
+
+---
+
+📦 1단계: 도메인 모델 설계
+
+모듈 이름: OrderManagement
+엔티티:
+
+📁 Entity: Customer
+
+속성명	타입
+
+Name	String
+Email	String
+
+
+📁 Entity: Order
+
+속성명	타입
+
+OrderNumber	String
+TotalAmount	Decimal
+
+
+관계:
+
+Customer(1) — (*)Order
+(Association 이름: Customer_Order)
+
+
+
+---
+
+📥 2단계: Import Mapping
+
+💡 JSON 예시 (외부에서 받아오는 구조)
+
+{
+  "Name": "홍길동",
+  "Email": "hong@test.com",
+  "Orders": [
+    {
+      "OrderNumber": "A001",
+      "TotalAmount": 100.5
+    },
+    {
+      "OrderNumber": "A002",
+      "TotalAmount": 150.75
+    }
+  ]
+}
+
+🛠 작업 순서
+
+1. JSON 구조 불러오기
+
+1. Studio Pro에서 App Explorer > OrderManagement > Import Mappings > New Import Mapping
+
+
+2. 이름: IM_CustomerOrders
+
+
+3. 데이터 소스: Import from JSON Example
+
+
+4. 위 JSON 예시를 붙여넣고 구조 생성
+
+
+
+2. 도메인 모델과 연결
+
+1. JSON 구조 생성 후, 맵핑 화면에서 루트 노드를 Customer로 지정
+
+
+2. Name → Customer.Name
+Email → Customer.Email
+Orders → Association to Order
+
+
+3. Orders.OrderNumber → Order.OrderNumber
+Orders.TotalAmount → Order.TotalAmount
+
+
+
+3. Microflow에서 사용
+
+1. Microflow 생성: Import_CustomerOrders
+
+
+2. 액티비티 추가: Import with mapping
+
+Mapping: IM_CustomerOrders
+
+Source: JSON string
+
+
+
+3. 결과로 반환된 Customer 객체를 커밋
+
+
+
+
+---
+
+📤 3단계: Export Mapping
+
+🔄 JSON으로 내보낼 때의 형태
+
+{
+  "Name": "홍길동",
+  "Email": "hong@test.com",
+  "Orders": [
+    {
+      "OrderNumber": "A001",
+      "TotalAmount": 100.5
+    },
+    {
+      "OrderNumber": "A002",
+      "TotalAmount": 150.75
+    }
+  ]
+}
+
+🛠 작업 순서
+
+1. Export Mapping 생성
+
+1. App Explorer > OrderManagement > Export Mappings > New Export Mapping
+
+
+2. 이름: EM_CustomerOrders
+
+
+3. 루트 객체: Customer
+
+
+4. 포함할 속성 및 연관된 객체 설정
+
+Customer.Name, Customer.Email
+
+연관된 Orders 리스트 → OrderNumber, TotalAmount
+
+
+
+
+2. Microflow에서 사용
+
+1. Microflow 생성: Export_CustomerOrders
+
+
+2. Retrieve Customer → Retrieve Orders
+
+
+3. Export with mapping 액티비티 사용
+
+Mapping: EM_CustomerOrders
+
+결과는 JSON 문자열
+
+
+
+4. 이 JSON 문자열을 REST 응답으로 사용하거나 파일로 저장 가능
+
+
+
+
+---
+
+📸 그림으로 이해 (요약)
+
+[ 외부 JSON 데이터 ]
+                   ↓
+         [ Import Mapping ] ← 매핑 생성
+                   ↓
+     [ Customer / Order 객체 생성 ]
+                   ↓
+       (Mendix에 저장 및 사용)
+
+       ----------------------
+
+     [ Customer 객체 in Mendix ]
+                   ↓
+         [ Export Mapping ] ← 매핑 생성
+                   ↓
+          [ JSON 형식으로 출력 ]
+
+
+---
