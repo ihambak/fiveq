@@ -1,0 +1,15 @@
+<select>
+  <option>ABC</option>
+  <option>ADL</option>
+  <option>XYZ</option>
+</select>
+
+<script>
+  document.querySelectorAll("select option").forEach(opt => {
+    if (opt.text.includes("ADL")) {
+      opt.style.color = "red";   // ADL 포함 → 빨강
+    } else {
+      opt.style.color = "black"; // 그 외 → 검정
+    }
+  });
+</script>
