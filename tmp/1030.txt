@@ -1,0 +1,93 @@
+package myfirstmodule.actions; // 모듈 이름에 맞게 패키지 이름을 변경하세요.
+
+import com.mendix.core.Core;
+import com.mendix.systemwideinterfaces.core.IContext;
+import com.mendix.systemwideinterfaces.core.IMendixObject;
+import java.util.List;
+
+/**
+ * 비영속 엔티티 목록을 파라미터로 받아 순회하며 데이터를 처리하는 Java Action입니다.
+ * 각 객체에서 이름, 전화번호, 이메일 속성을 추출하여 변수에 담습니다.
+ */
+public class ProcessNonPersistableList extends com.mendix.webui.CustomJavaAction<java.lang.Integer>
+{
+	private java.util.List<IMendixObject> targetList;
+
+	public ProcessNonPersistableList(IContext context, java.util.List<IMendixObject> targetList)
+	{
+		super(context);
+		this.targetList = targetList;
+	}
+
+	@java.lang.Override
+	public java.lang.Integer executeAction() throws Exception
+	{
+		// BEGIN USER CODE
+		int count = 0;
+        
+        // 파라미터로 전달받은 리스트가 null이 아닌지 확인
+        if (this.targetList != null) {
+            
+            // 리스트를 순회하며 각 IMendixObject를 처리
+            for (IMendixObject obj : this.targetList) {
+                
+                // 각 객체의 속성 값을 추출하여 개별 변수에 담습니다.
+                // getValue()의 결과는 Object이므로, 필요한 타입으로 캐스팅합니다.
+                
+                // 1. 이름 (Name)
+                String name = null;
+                Object nameValue = obj.getValue(getContext(), "Name");
+                if (nameValue instanceof String) {
+                    name = (String) nameValue;
+                }
+                
+                // 2. 전화번호 (PhoneNumber)
+                String phoneNumber = null;
+                Object phoneValue = obj.getValue(getContext(), "PhoneNumber");
+                if (phoneValue instanceof String) {
+                    phoneNumber = (String) phoneValue;
+                }
+                
+                // 3. 이메일 (Email)
+                String email = null;
+                Object emailValue = obj.getValue(getContext(), "Email");
+                if (emailValue instanceof String) {
+                    email = (String) emailValue;
+                }
+
+                // 4. 추출된 변수를 활용한 비즈니스 로직 수행
+                // 추출된 변수(name, phoneNumber, email)는 이 시점에서 사용 가능합니다.
+                Core.getLogger(this.getClass().getName()).info(
+                    String.format(
+                        "Processing Record #%d: Name=%s, Phone=%s, Email=%s",
+                        count + 1,
+                        name != null ? name : "없음",
+                        phoneNumber != null ? phoneNumber : "없음",
+                        email != null ? email : "없음"
+                    )
+                );
+                
+                // 예시: 이름이 'Mendix'인 경우에만 특별 처리
+                if (name != null && name.equals("Mendix")) {
+                    Core.getLogger(this.getClass().getName()).info(">> Special handling for Mendix user.");
+                    // 여기에 추가적인 로직을 구현합니다.
+                }
+                
+                count++;
+            }
+        }
+        
+        // 처리된 객체의 총 개수 반환
+        return count; 
+		// END USER CODE
+	}
+
+	/**
+	 * Returns a string representation of this action
+	 */
+	@java.lang.Override
+	public java.lang.String toString()
+	{
+		return "ProcessNonPersistableList";
+	}
+}
