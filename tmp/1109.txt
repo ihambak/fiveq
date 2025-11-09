@@ -1,0 +1,86 @@
+const numbers = [3, null, 1, 5, null, 2];
+
+numbers.sort((a, b) => {
+  // null 값은 항상 뒤로 보냄
+  if (a === null) return 1;
+  if (b === null) return -1;
+
+  // 숫자 오름차순
+  return a - b;
+});
+
+console.log(numbers);
+// 👉 [1, 2, 3, 5, null, null]
+-------
+const names = ["Tom", null, "Alice", "Bob", null, "Charlie"];
+
+names.sort((a, b) => {
+  if (a === null) return 1;
+  if (b === null) return -1;
+
+  // 문자열 비교 (localeCompare 사용)
+  return a.localeCompare(b);
+});
+
+console.log(names);
+// 👉 ["Alice", "Bob", "Charlie", "Tom", null, null]
+
+-------
+const dates = [
+  new Date("2024-01-10"),
+  null,
+  new Date("2023-12-25"),
+  new Date("2024-02-15"),
+  null
+];
+
+dates.sort((a, b) => {
+  if (a === null) return 1;
+  if (b === null) return -1;
+
+  // 날짜 오름차순
+  return a - b;
+});
+
+console.log(dates);
+// 👉 [2023-12-25, 2024-01-10, 2024-02-15, null, null]
+
+
+-----------------------------------------------------------------------
+function ascWithNullLast(a, b) {
+  if (a === null) return 1;
+  if (b === null) return -1;
+
+  // 문자열 비교
+  if (typeof a === "string" && typeof b === "string") {
+    return a.localeCompare(b);
+  }
+
+  // 날짜 비교
+  if (a instanceof Date && b instanceof Date) {
+    return a - b;
+  }
+
+  // 숫자 등 기본 비교
+  return a - b;
+}
+-----------------------------------------------------------------------
+function descWithNullLast(a, b) {
+  if (a === null) return 1;
+  if (b === null) return -1;
+
+  // 문자열 비교 (역순)
+  if (typeof a === "string" && typeof b === "string") {
+    return b.localeCompare(a);
+  }
+
+  // 날짜 비교 (역순)
+  if (a instanceof Date && b instanceof Date) {
+    return b - a;
+  }
+
+  // 숫자 등 기본 비교 (역순)
+  return b - a;
+}
+
+
